@@ -1,0 +1,13 @@
+Changes to be done before moving to Production :
+
+1. Persist accounts and transfers in a transactional database. The in-memory repository loses state on restart and cannot perform transfers across application instances.
+2. Add timeout and retry for lock (tryLock with defined timeout and retry count),  and request (request timeout, safe retries with backoff, backed by idempotency keys so a client retry after a timeout cannot move money twice.)
+3. Make the debit and credit one atomic transaction, with database-level concurrency control.
+4. Notification to be sent asynchronously via queue or Kafka to reduce latency and separate control of retry
+5. Authentication and authorisation, so a sender can only move money out of accounts they own. Add rate limiting.
+6. Structured logs with correlation ids (splunk) , metrics and request tracing (Grafana, Dynatrace) , Actuator health and readiness probes, alerting.
+7.  Integration tests against a real database
+8.  CI/CD pipeline with build, coverage, test run and vulnerability scanning
+9. Add Containerised deployment config
+
+

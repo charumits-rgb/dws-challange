@@ -1,0 +1,22 @@
+Changes done in existing files
+
+Account.java : Changed from javax to jakarta as provided src.zip was using spring boot 4.1.1
+Account.java : Make the balance as volatile so that thread sees the latest value
+AccountsController :  Again has made the changes from javax to jakarta for successful build of the file
+AccountsController :  New POST Request has been added to transfer balance from one account to another account
+EmailNotificationService  : To build a code successfully, I have added @Service on EmailNotificationService
+
+New files added :
+
+TransferRequest.java : To define JSON payload request for transferring money between two accounts
+TransferService.java : Contains business logic to transfer amount from one account to another and notify the source. Implemented in Thread safe manner.
+
+TransferException.java : To validate Transfer Request parameters received in payload
+InvalidAccountException.java : To validate if both account exists in our repository
+InsufficientBalanceException.java : To validate if source account has sufficient  balance to transfer
+
+Test Files :
+Test cases are AI generated
+
+AccountsControllerTest : Mocked Notification service and includes the test cases for new REST API
+TransferServiceTest.java : Test cases for the new transfer feature
